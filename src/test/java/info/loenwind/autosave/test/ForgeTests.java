@@ -42,7 +42,7 @@ public class ForgeTests {
     void fill() {
       block = Blocks.BEDROCK;
       item = Items.APPLE;
-      ench = Enchantments.PROTECTION;
+      ench = Enchantments.ALL_DAMAGE_PROTECTION;
 
       chest = (ChestBlock) Blocks.CHEST;
       bow = (BowItem) Items.BOW;
@@ -68,7 +68,7 @@ public class ForgeTests {
   @Test
   public void testUnregistered() {
     class Unregistered {
-      @Store public Block block = new Block(Block.Properties.create(Material.AIR));
+      @Store public Block block = new Block(Block.Properties.of(Material.AIR));
     }
     Assertions.assertThrows(IllegalArgumentException.class, () -> Writer.write(new CompoundNBT(), new Unregistered()));
   }

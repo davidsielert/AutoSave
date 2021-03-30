@@ -14,27 +14,28 @@ import net.minecraft.util.math.BlockPos;
 
 public class HandleBlockPos implements IHandler<BlockPos> {
 
-  public HandleBlockPos() {
-  }
-
-  @Override
-  public Class<?> getRootType() {
-    return BlockPos.class;
-  }
-
-  @Override
-  public boolean store(Registry registry, Set<NBTAction> phase, CompoundNBT nbt, Type type, String name, BlockPos object)
-      throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoHandlerFoundException {
-    nbt.putLong(name, object.toLong());
-    return true;
-  }
-
-  @Override
-  public @Nullable BlockPos read(Registry registry, Set<NBTAction> phase, CompoundNBT nbt, Type type, String name,
-      @Nullable BlockPos object) throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoHandlerFoundException {
-    if (nbt.contains(name)) {
-      return BlockPos.fromLong(nbt.getLong(name));
+    public HandleBlockPos() {
     }
-    return object;
-  }
+
+    @Override
+    public Class<?> getRootType() {
+        return BlockPos.class;
+    }
+
+    @Override
+    public boolean store(Registry registry, Set<NBTAction> phase, CompoundNBT nbt, Type type, String name, BlockPos object)
+            throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoHandlerFoundException {
+        nbt.putLong(name, object.asLong());
+        return true;
+    }
+
+    @Override
+    public @Nullable
+    BlockPos read(Registry registry, Set<NBTAction> phase, CompoundNBT nbt, Type type, String name,
+                  @Nullable BlockPos object) throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoHandlerFoundException {
+        if (nbt.contains(name)) {
+            return BlockPos.of(nbt.getLong(name));
+        }
+        return object;
+    }
 }

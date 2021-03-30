@@ -31,7 +31,7 @@ public class HandleItemStack implements IHandler<ItemStack> {
       nbt.putBoolean(name + StorableEngine.EMPTY_POSTFIX, true);
     } else {
       CompoundNBT tag = new CompoundNBT();
-      object.write(tag);
+      object.save(tag);
       nbt.put(name, tag);
     }
     return true;
@@ -42,7 +42,7 @@ public class HandleItemStack implements IHandler<ItemStack> {
       @Nullable ItemStack object) throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoHandlerFoundException {
     if (nbt.contains(name)) {
       CompoundNBT tag = nbt.getCompound(name);
-      return ItemStack.read(tag);
+      return ItemStack.of(tag);
     } else if (nbt.contains(name + StorableEngine.EMPTY_POSTFIX)) {
       return ItemStack.EMPTY;
     }

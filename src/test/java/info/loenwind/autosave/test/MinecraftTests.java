@@ -38,7 +38,7 @@ public class MinecraftTests {
 
     void fill() {
       pos = new BlockPos(867, 5, 309);
-      state = Blocks.OAK_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.Z);
+      state = Blocks.OAK_LOG.defaultBlockState();// @todo not sure how this translates to 1.16.5 mappings .with(RotatedPillarBlock.AXIS, Direction.Axis.Z);
       stack = new ItemStack(Items.GOLDEN_APPLE, 32);
       resloc = new ResourceLocation("fancy", "strings");
       
@@ -81,7 +81,7 @@ public class MinecraftTests {
   }
   
   private boolean compareStacks(ItemStack i1, ItemStack i2) {
-    return i1 == i2 || (i1 != null && i2 != null && ItemStack.areItemsEqual(i1, i2) && ItemStack.areItemStackTagsEqual(i1, i2));
+    return i1 == i2 || (i1 != null && i2 != null && ItemStack.isSame(i1, i2) && ItemStack.tagMatches(i1, i2));
   }
 
   @Test

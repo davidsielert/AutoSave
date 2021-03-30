@@ -31,7 +31,7 @@ public class BootstrapSetup implements BeforeAllCallback {
             f.setAccessible(true);
             f.set(null, "26.0.0");
             
-            Bootstrap.register();
+            Bootstrap.bootStrap();
         }
 
         @Override
